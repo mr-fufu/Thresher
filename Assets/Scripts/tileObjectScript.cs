@@ -5,7 +5,6 @@ using UnityEngine;
 public class tileObjectScript : MonoBehaviour
 {
     public string tileType;
-
     public int height;
 
     // Start is called before the first frame update

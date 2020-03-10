@@ -4,15 +4,50 @@ using UnityEngine;
 
 public class ActorScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Sprite facingNE;
+    public Sprite facingSE;
+    public Sprite facingSW;
+    public Sprite facingNW;
+
+    public bool facingRight;
+    public bool facingUp;
+
+    private Sprite setSprite;
+
+    public int stat_Health;
+    public int stat_Attack;
+    public int stat_Speed;
+
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (facingRight)
+        {
+            if (facingUp)
+            {
+                setSprite = facingNE;
+            }
+            else
+            {
+                setSprite = facingSE;
+            }
+        }
+        else
+        {
+            if (facingUp)
+            {
+                setSprite = facingNW;
+            }
+            else
+            {
+                setSprite = facingSW;
+            }
+        }
+
+        GetComponent<SpriteRenderer>().sprite = setSprite;
     }
 }

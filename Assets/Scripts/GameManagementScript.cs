@@ -7,18 +7,18 @@ public class GameManagementScript : MonoBehaviour
 {
     public GameObject tilesGrid;
     public GameObject effectsGrid;
-    public GameObject objectsGrid;
+    public GameObject charactersGrid;
     public GameObject dataGrid;
 
     private Tilemap tiles;
     private Tilemap effects;
-    private Tilemap objects;
+    private Tilemap characters;
     private Tilemap data;
 
     public Tile pointerTile;
 
     public GameObject summonLibrary;
-
+    public CameraController mainCamera;
     public TileLibraryScript tileLibrary;
 
     public int mapSizeX;
@@ -32,13 +32,12 @@ public class GameManagementScript : MonoBehaviour
     public int[] initLocation;
 
     private bool initializeCheck;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         tiles = tilesGrid.GetComponent<Tilemap>();
         effects = effectsGrid.GetComponent<Tilemap>();
-        objects = objectsGrid.GetComponent<Tilemap>();
+        characters = charactersGrid.GetComponent<Tilemap>();
         data = dataGrid.GetComponent<Tilemap>();
 
         pointerLocation = new int[2] { 0, 15 };
@@ -76,7 +75,12 @@ public class GameManagementScript : MonoBehaviour
         showPointer();
     }
 
-    string checkTileType(int[] typeCheckLocation)
+    public Vector3 checkCoordinates(int[] gridToCheck)
+    {
+        return tiles.CellToLocal(new Vector3Int(gridToCheck[0], gridToCheck[1], 0));
+    }
+
+    public string checkTileType(int[] typeCheckLocation)
     {
         if (data.GetInstantiatedObject(new Vector3Int(typeCheckLocation[0], typeCheckLocation[1], 0)) != null)
         {
@@ -93,7 +97,7 @@ public class GameManagementScript : MonoBehaviour
         data.GetInstantiatedObject(new Vector3Int(typeSetLocation[0], typeSetLocation[1], 0)).GetComponent<tileObjectScript>().tileType = setType;
     }
 
-    float checkTileHeight(int[] heightCheckLocation)
+    public float checkTileHeight(int[] heightCheckLocation)
     {
         return tiles.GetTransformMatrix(new Vector3Int(heightCheckLocation[0], heightCheckLocation[1], 0))[1,3];
     }
@@ -110,12 +114,9 @@ public class GameManagementScript : MonoBehaviour
         effects.SetTile(new Vector3Int(pointerLocation[0], pointerLocation[1], 1), pointerTile);
         effects.SetTransformMatrix(new Vector3Int(pointerLocation[0], pointerLocation[1], 1), 
             tiles.GetTransformMatrix(new Vector3Int(pointerLocation[0], pointerLocation[1], 0)));
-
-        //Debug.Log(data.GetInstantiatedObject(new Vector3Int(pointerLocation[0], pointerLocation[1], 0)).GetComponent<tileObjectScript>().tileType);
-        //Debug.Log(data.GetInstantiatedObject(new Vector3Int(pointerLocation[0], pointerLocation[1], 0)).GetComponent<tileObjectScript>().height);
     }
 
-    void plantPumpkins(int[] pumpkinLocation)
+    public void plantPumpkins(int[] pumpkinLocation)
     {
         if (checkTileType(pumpkinLocation) == "grass")
         {
@@ -124,7 +125,7 @@ public class GameManagementScript : MonoBehaviour
         }
     }
 
-    void plantWheat(int[] wheatLocation)
+    public void plantWheat(int[] wheatLocation)
     {
         if (checkTileType(wheatLocation) == "grass")
         {
@@ -166,16 +167,9 @@ public class GameManagementScript : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void movePointer(int moveDir)
     {
-        if (!initializeCheck)
-        {
-            initialize();
-            initializeCheck = true;
-        }
-
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (moveDir == 0)
         {
             if (pointerLocation[0] < mapSize[0])
             {
@@ -183,15 +177,7 @@ public class GameManagementScript : MonoBehaviour
                 showPointer();
             }
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            if (pointerLocation[0] > 0)
-            {
-                pointerLocation[0]--;
-                showPointer();
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (moveDir == 1)
         {
             if (pointerLocation[1] < mapSize[1])
             {
@@ -199,13 +185,31 @@ public class GameManagementScript : MonoBehaviour
                 showPointer();
             }
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (moveDir == 2)
+        {
+            if (pointerLocation[0] > 0)
+            {
+                pointerLocation[0]--;
+                showPointer();
+            }
+        }
+        else if (moveDir == 3)
         {
             if (pointerLocation[1] > 0)
             {
                 pointerLocation[1]--;
                 showPointer();
             }
+        }
+
+    }
+
+    void Update()
+    {
+        if (!initializeCheck)
+        {
+            initialize();
+            initializeCheck = true;
         }
     }
 }
