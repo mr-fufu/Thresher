@@ -4,27 +4,14 @@ using UnityEngine;
 
 public class tileObjectScript : MonoBehaviour
 {
-    public bool water;
-    public bool grass;
-    public bool sand;
-
     public string tileType;
+
+    public int height;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (water)
-        {
-            tileType = "water";
-        }
-        else if (grass)
-        {
-            tileType = "grass";
-        }
-        else
-        {
-            tileType = "sand";
-        }
+
     }
 
     // Update is called once per frame

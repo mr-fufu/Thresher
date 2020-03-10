@@ -10,18 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e6f3fbb560bd6041a202ea918fa4f23, type: 3}
-  m_Name: GrassTile
+  m_Name: tile_data
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 0}
-  m_DefaultGameObject: {fileID: 1738116949818029897, guid: 694ed1f3a872c3141a9ab0cc6bca7e86,
+  m_DefaultSprite: {fileID: -7326330765846486680, guid: 9172fb3711dee7b4e8385f4e89e74b1c,
     type: 3}
-  m_DefaultColliderType: 2
+  m_DefaultGameObject: {fileID: 1738116949818029897, guid: d2cb1b1becdb01c4aa1f165926146fe2,
+    type: 3}
+  m_DefaultColliderType: 1
   m_siblings: []
   m_TilingRules:
   - m_Id: 0
     m_Sprites:
-    - {fileID: -4684333735789482159, guid: 9172fb3711dee7b4e8385f4e89e74b1c, type: 3}
-    m_GameObject: {fileID: 0}
+    - {fileID: -7326330765846486680, guid: 9172fb3711dee7b4e8385f4e89e74b1c, type: 3}
+    m_GameObject: {fileID: 1738116949818029897, guid: d2cb1b1becdb01c4aa1f165926146fe2,
+      type: 3}
     m_AnimationSpeed: 1
     m_PerlinScale: 0.5
     m_Output: 0
