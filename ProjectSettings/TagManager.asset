@@ -41,6 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Tiles
+    uniqueID: 1902143743
+    locked: 0
   - name: Actor
     uniqueID: 3430914477
     locked: 0
