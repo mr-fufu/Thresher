@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class GameControllerScript : MonoBehaviour
 {
+    [System.NonSerialized]
     public bool factionChosen;
+    [System.NonSerialized]
     public string faction;
 
-    public GameObject factionSelectScreen;
+    public CameraController mainCamera;
 
+    public GameObject factionSelectScreen;
+    public GameObject placementController;
+
+    [System.NonSerialized]
     public bool inPlacement;
-    public int characterCount;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        placementController.SetActive(false);
     }
 
     public void factionSelect(string chosenFaction)
@@ -29,9 +34,15 @@ public class GameControllerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!factionChosen)
+        if (!factionChosen && !factionSelectScreen.activeSelf)
         {
             factionSelectScreen.SetActive(true);
+        }
+
+        if (inPlacement && !placementController.activeSelf)
+        {
+            mainCamera.toggleZoomToPointer();
+            placementController.SetActive(true);
         }
     }
 }

@@ -9,7 +9,9 @@ public class ActorScript : MonoBehaviour
     public Sprite facingSW;
     public Sprite facingNW;
 
+    [System.NonSerialized]
     public bool facingRight;
+    [System.NonSerialized]
     public bool facingUp;
 
     private Sprite setSprite;
@@ -17,6 +19,7 @@ public class ActorScript : MonoBehaviour
     public int stat_Health;
     public int stat_Attack;
     public int stat_Speed;
+    public int population;
 
     void Start()
     {

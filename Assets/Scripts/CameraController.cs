@@ -5,7 +5,9 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Camera mainCamera;
-    public GameManagementScript gameManager;
+    public TileManagementScript gameManager;
+
+    [System.NonSerialized]
     public int[] toLocation;
     private Vector3 toVector;
     private float scale;
